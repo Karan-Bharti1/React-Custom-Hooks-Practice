@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { useCounter } from './customHooks'
+import { useCounter, useToggle } from './customHooks'
 function Counter(){
   const { counter, increment, decrement, reset } = useCounter(0);
   return(
@@ -14,12 +14,22 @@ function Counter(){
     </div>
   )
  }
+ function ToggleSwitch() {
+  const { value, toggle } = useToggle(false);
+  return (
+    <div>
+      <h1>Current State: {value ? "True" : "False"}</h1>
+      <button onClick={toggle}>Toggle</button>
+    </div>
+  );
+}
 function App() {
 
 
   return (
     <>
       <Counter/>
+      <ToggleSwitch/>
     </>
   )
 }

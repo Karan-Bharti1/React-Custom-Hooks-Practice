@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 export function useCounter(init){
     const [counter,setCounter]=useState(init)
 const increment=()=>setCounter(count=>count+1)
@@ -10,4 +10,18 @@ export function useToggle(init){
     const [value,setValue]=useState(init)
     const toggle=()=>setValue(!value)
     return{value,toggle}
+}
+export  function useFetch(url){
+const [data,setData]=useState()
+const [loading,setLoading]=useState(false)
+const [error,setError]=useState()
+
+useEffect(()=>{
+setLoading(true)
+fetch(url).then(res=>res.json())
+.then(data=>setData(data))
+.catch(error=>setError(error.message))
+.finally(()=>setLoading(false))
+},[url])
+return {data,loading,error}
 }

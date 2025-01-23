@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { useCounter, useToggle } from './customHooks'
+import { useCounter, useFetch, useToggle } from './customHooks'
 function Counter(){
   const { counter, increment, decrement, reset } = useCounter(0);
   return(
@@ -23,6 +23,19 @@ function Counter(){
     </div>
   );
 }
+function UserList() {
+  const { data, loading, error } = useFetch('https://jsonplaceholder.typicode.com/users');
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  return (
+    <ul>
+      {data?.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
 function App() {
 
 
@@ -30,6 +43,7 @@ function App() {
     <>
       <Counter/>
       <ToggleSwitch/>
+      <UserList/>
     </>
   )
 }

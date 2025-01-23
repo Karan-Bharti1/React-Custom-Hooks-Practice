@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { useCounter, useFetch, useToggle } from './customHooks'
+import { useCounter, useFetch, useLogger, useToggle } from './customHooks'
 function Counter(){
   const { counter, increment, decrement, reset } = useCounter(0);
   return(
@@ -36,6 +36,21 @@ console.log(error)
     </ul>
   );
 }
+function LoggerComponent() {
+  const { value, setValue } = useLogger('');
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Type something..."
+      />
+      <p>Current value: {value}</p>
+    </div>
+  );
+}
 function App() {
 
 
@@ -44,6 +59,7 @@ function App() {
       <Counter/>
       <ToggleSwitch/>
       <UserList/>
+      <LoggerComponent/>
     </>
   )
 }

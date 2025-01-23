@@ -25,3 +25,8 @@ fetch(url).then(res=>res.json())
 },[url])
 return {data,loading,error}
 }
+ export function useLogger(message){
+ const [value,setValue]=useState(message)   
+value.length>0&&console.log("Value Changed to: ",value)
+ return {value,setValue}
+ }

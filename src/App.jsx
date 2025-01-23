@@ -25,7 +25,7 @@ function Counter(){
 }
 function UserList() {
   const { data, loading, error } = useFetch('https://jsonplaceholder.typicode.com/users');
-
+console.log(error)
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   return (

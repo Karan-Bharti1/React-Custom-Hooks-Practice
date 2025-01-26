@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { useCounter, useFetch, useLogger, useToggle } from './customHooks'
+import { useCounter, useFetch, useLocalStorage, useLogger, useToggle } from './customHooks'
 function Counter(){
   const { counter, increment, decrement, reset } = useCounter(0);
   return(
@@ -51,6 +51,21 @@ function LoggerComponent() {
     </div>
   );
 }
+function LocalStorageComponent() {
+  const { value, setValue } = useLocalStorage('inputValue', '');
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Type something..."
+      />
+      <p>Stored value: {value}</p>
+    </div>
+  );
+}
 function App() {
 
 
@@ -60,6 +75,7 @@ function App() {
       <ToggleSwitch/>
       <UserList/>
       <LoggerComponent/>
+      <LocalStorageComponent/>
     </>
   )
 }

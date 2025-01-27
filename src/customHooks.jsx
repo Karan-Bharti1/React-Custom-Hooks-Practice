@@ -32,7 +32,7 @@ value.length>0&&console.log("Value Changed to: ",value)
  }
  export function useLocalStorage(key,initialValue){
 const storedData=localStorage.getItem(key)
-const [value,setValue]=useState(initialValue)
+const [value,setValue]=useState(storedData ? JSON.parse(storedData) : initialValue)
 useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
